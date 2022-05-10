@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: board-cms-api
+  name: board-cms-api
+  namespace: xiaohuiyun
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: board-cms-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: board-cms-api
+      name: board-cms-api
+    spec:
+      volumes:
+        - name: conf
+          persistentVolumeClaim:
+            claimName: conf
+      containers:
+        - name: board-cms-api
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/board-cms-api:v2.0
+          imagePullPolicy: IfNotPresent
+          command: [ "./board-cms-api", "-f", "etc/board-cms-api.yaml" ]
+          volumeMounts:
+            - name: conf
+              mountPath: /app/etc
+          resources: { }
+          securityContext:
+            privileged: false
+            procMount: Default
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: board-cms-api
+  namespace: xiaohuiyun
+  labels:
+    name: board-cms-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: board-cms-api

@@ -1,0 +1,49 @@
+---
+Name: auth.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    CloudscreenPersonCenterLoginLog: cloudscreen_person_center_login_log
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+UserRpc:
+  Endpoints:
+    - user-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+TenantRpc:
+  Endpoints:
+    - tenant-rpc.xiaohuiyun.svc.cluster.local:2000
+FaceRpc:
+  Endpoints:
+    - face-rpc.xiaohuiyun.svc.cluster.local:2000
+CardRpc:
+  Endpoints:
+    - card-rpc.xiaohuiyun.svc.cluster.local:2000
+DevicePositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+  RefreshSecret: v4zj9kk63u2yt77l
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+  RefreshSecret: v4zj9kk63u2yt77l
+AppAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+  RefreshSecret: v4zj9kk63u2yt77l
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+  RefreshSecret: v4zj9kk63u2yt77l
+TenantAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+  RefreshSecret: v4zj9kk63u2yt77l
+Quota: 5

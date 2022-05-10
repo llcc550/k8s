@@ -1,0 +1,12 @@
+---
+Name: afterschoolservice.cron
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    AfterSchoolService: after_school_service
+    AfterSchoolServiceStudents: after_school_service_students
+    AfterSchoolServiceStudentsHistory: after_school_service_students_history
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379

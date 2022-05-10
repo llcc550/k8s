@@ -1,0 +1,29 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: qinghu-cron
+  namespace: xiaohuiyun
+spec:
+  schedule: "00 */2 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: conf
+              persistentVolumeClaim:
+                claimName: conf
+          containers:
+            - name: qinghu-cron
+              image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/qinghu-cron:latest
+              volumeMounts:
+                - name: conf
+                  mountPath: /app/etc
+              args:
+                - /app/qinghu-cron
+                - -f
+                - /app/etc/qinghu-cron.yaml
+          imagePullSecrets:
+            - name: image-pull-secret
+          restartPolicy: OnFailure

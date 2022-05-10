@@ -1,0 +1,29 @@
+---
+Name: teacherattendance.cron
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    AttendanceApproveInfo: attendance_approve_info
+    AttendanceCalendar: attendance_calendar
+    AttendanceFirstInfo: attendance_first_info
+    AttendanceCenter: attendance_center
+    AttendanceMember: attendance_members
+    TeacherPunch: teacher_punch
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+TripRpc:
+  Endpoints:
+    - trip-rpc.xiaohuiyun.svc.cluster.local:2000
+VacationRpc:
+  Endpoints:
+    - vacation-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatGateWay:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+Tube: teacherattendance

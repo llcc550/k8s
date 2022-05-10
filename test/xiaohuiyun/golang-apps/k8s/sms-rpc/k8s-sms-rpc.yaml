@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sms-rpc
+  name: sms-rpc
+  namespace: xiaohuiyun
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sms-rpc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: sms-rpc
+      name: sms-rpc
+    spec:
+      volumes:
+        - name: conf
+          persistentVolumeClaim:
+            claimName: conf
+      containers:
+        - name: sms-rpc
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/sms-rpc:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "./sms-rpc", "-f", "etc/sms-rpc.yaml" ]
+          volumeMounts:
+            - name: conf
+              mountPath: /app/etc
+          resources: { }
+          securityContext:
+            privileged: false
+            procMount: Default
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sms-rpc
+  namespace: xiaohuiyun
+  labels:
+    name: sms-rpc
+spec:
+  type: NodePort
+  ports:
+    - port: 2000
+      targetPort: 2000
+      nodePort: 31018
+  selector:
+    app: sms-rpc

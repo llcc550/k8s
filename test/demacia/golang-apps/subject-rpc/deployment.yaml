@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demacia-subject-rpc
+  name: demacia-subject-rpc
+  namespace: demacia
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demacia-subject-rpc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: demacia-subject-rpc
+      name: demacia-subject-rpc
+    spec:
+      containers:
+        - name: demacia-subject-rpc
+          image: swr.cn-east-3.myhuaweicloud.com/demacia/subject-rpc:latest
+          command: [ "./app", "-f", "config.yaml" ]
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demacia-subject-rpc
+  namespace: demacia
+  labels:
+    name: demacia-subject-rpc
+spec:
+  type: NodePort
+  ports:
+    - port: 2000
+      targetPort: 2000
+      nodePort: 32010
+  selector:
+    app: demacia-subject-rpc

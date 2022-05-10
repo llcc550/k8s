@@ -1,0 +1,62 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: internship
+  name: internship
+  namespace: zaun
+spec:
+  selector:
+    matchLabels:
+      app: internship
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: internship
+    spec:
+      containers:
+        - name: php-nginx
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/internship:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: internship
+              mountPath: /html/public/uploads
+            - name: php-config
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
+            - name: nginx-config
+              mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: internship
+          persistentVolumeClaim:
+            claimName: internship
+        - name: nginx-config
+          configMap:
+            name: internship-nginx-config
+        - name: php-config
+          configMap:
+            name: internship-php-config
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: internship
+  namespace: zaun
+spec:
+  selector:
+    app: internship
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80

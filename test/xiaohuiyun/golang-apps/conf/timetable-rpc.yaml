@@ -1,0 +1,31 @@
+---
+Name: timetable.rpc
+Log:
+  Mode: console
+ListenOn: 0.0.0.0:2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Timetable: organization_timetables
+    OrganizationTeachings: organization_teachings
+    OrganizationTeachingsCurrentSemester: organization_teachings_current_semester
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+SubjectRpc:
+  Endpoints:
+    - subject-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000

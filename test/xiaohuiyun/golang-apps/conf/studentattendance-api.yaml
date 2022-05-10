@@ -1,0 +1,60 @@
+---
+Name: studentattendance.api
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    StudentAttendance: student_attendance
+    OfficialHoliday: official_holiday
+    StudentAttendanceConfig: student_attendance_config
+    StudentAttendanceConfigDaily: student_attendance_config_daily
+    StudentAttendanceHoliday: student_attendance_holiday
+    StudentAttendanceTimeGroup: student_attendance_time_group
+    StudentAttendanceTime: student_attendance_time
+    StudentAttendanceArrange: student_attendance_arrange
+    StudentAttendanceSchoolClass: student_attendance_school_class
+    StudentAttendanceDorm: student_attendance_dorm
+    StudentAttendanceBus: student_attendance_bus
+    StudentAttendanceSelfStudy: student_attendance_self_study
+    StudentAttendanceStatistics: student_attendance_statistics
+    StudentPunch: student_punch
+    StudentPunchStatistics: student_punch_statistics
+    StudentAttendanceVacation: student_attendance_vacation
+    StudentAttendanceSelfStudyTeacher: student_attendance_self_study_teacher
+    TeacherPunch: teacher_punch
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+DevicePositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+DormRpc:
+  Endpoints:
+    - dorm-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentParentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+PdfRpc:
+  Endpoints:
+    - pdf-rpc.xiaohuiyun.svc.cluster.local:2000
+CardRpc:
+  Endpoints:
+    - card-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatPushRpc:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+PushGatewayRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000
+AttendanceUrl: http://board-api.xiaohuiyun.svc.cluster.local:80/gate/receive
+ZuyLeaveUrl: http://zuy-api.xiaohuiyun.svc.cluster.local:2000/leave/student

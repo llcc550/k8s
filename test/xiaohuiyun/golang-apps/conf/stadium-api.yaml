@@ -1,0 +1,32 @@
+---
+Name: stadium.api
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    StadiumSetting: stadium_setting
+    StadiumPosition: stadium_position
+    StadiumMember: stadium_member
+    StadiumMemberRecord: stadium_member_record
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+PositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+SmsRpc:
+  Endpoints:
+    - sms-rpc.xiaohuiyun.svc.cluster.local:2000
+FaceRpc:
+  Endpoints:
+    - face-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+PushRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000

@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: sanctum-web
+  name: sanctum-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: sanctum-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sanctum-web
+    spec:
+      containers:
+        - name: sanctum-web
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/sanctum-web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 2
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 500m
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sanctum-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: sanctum-web
+  ports:
+    - port: 80
+      targetPort: 80

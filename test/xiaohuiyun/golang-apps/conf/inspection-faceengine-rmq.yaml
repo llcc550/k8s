@@ -1,0 +1,14 @@
+---
+Name: inspection-faceengine-rmq
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/inspection?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    UserFaceInfo: user_face_info
+FaceTube:
+  EndPoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: "face-inspection"
+FaceEngine:
+  APPId: C1jxEpQ1a9iHt9ez3bsAZL1cq1BXcSsp46GeUbZ3Cun9
+  APPKey: 2EuMqQYkAG1xwEJVfJpL39mo4d5GpraU376WKzH9Aish

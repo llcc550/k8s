@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zuy-api
+  name: zuy-api
+  namespace: xiaohuiyun
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zuy-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: zuy-api
+      name: zuy-api
+    spec:
+      volumes:
+        - name: conf
+          persistentVolumeClaim:
+            claimName: conf
+      containers:
+        - name: zuy-api
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/zuy-api:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "./zuy-api", "-f", "etc/zuy-api.yaml" ]
+          volumeMounts:
+            - name: conf
+              mountPath: /app/etc
+          resources: { }
+          securityContext:
+            privileged: false
+            procMount: Default
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zuy-api
+  namespace: xiaohuiyun
+  labels:
+    name: zuy-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: zuy-api

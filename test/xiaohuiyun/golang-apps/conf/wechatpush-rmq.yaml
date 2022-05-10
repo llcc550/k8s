@@ -1,0 +1,14 @@
+---
+Name: wechatpush.rmq
+Log:
+  Mode: console
+Redis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+  Key: push.wechat
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+PushWorkers: 256
+WechatGroup:
+  - AppId: wx32c8c8d48bf436e7
+    Secret: e1ae59f5c9701303ccc55b7abcf7ed49
+    Desc: 鼎昊信息

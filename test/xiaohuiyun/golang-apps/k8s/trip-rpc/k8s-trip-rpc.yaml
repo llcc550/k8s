@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: trip-rpc
+  name: trip-rpc
+  namespace: xiaohuiyun
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trip-rpc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: trip-rpc
+      name: trip-rpc
+    spec:
+      volumes:
+        - name: conf
+          persistentVolumeClaim:
+            claimName: conf
+      containers:
+        - name: trip-rpc
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/trip-rpc:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "./trip-rpc", "-f", "etc/trip-rpc.yaml" ]
+          volumeMounts:
+            - name: conf
+              mountPath: /app/etc
+          resources: { }
+          securityContext:
+            privileged: false
+            procMount: Default
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trip-rpc
+  namespace: xiaohuiyun
+  labels:
+    name: trip-rpc
+spec:
+  type: NodePort
+  ports:
+    - port: 2000
+      targetPort: 2000
+      nodePort: 31024
+  selector:
+    app: trip-rpc

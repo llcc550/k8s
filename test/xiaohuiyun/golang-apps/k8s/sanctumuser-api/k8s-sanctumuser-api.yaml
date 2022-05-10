@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sanctumuser-api
+  name: sanctumuser-api
+  namespace: xiaohuiyun
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sanctumuser-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: sanctumuser-api
+      name: sanctumuser-api
+    spec:
+      volumes:
+        - name: conf
+          persistentVolumeClaim:
+            claimName: conf
+      containers:
+        - name: sanctumuser-api
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/sanctumuser-api:v2.0
+          imagePullPolicy: IfNotPresent
+          command: [ "./sanctumuser-api", "-f", "etc/sanctumuser-api.yaml" ]
+          volumeMounts:
+            - name: conf
+              mountPath: /app/etc
+          resources: { }
+          securityContext:
+            privileged: false
+            procMount: Default
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sanctumuser-api
+  namespace: xiaohuiyun
+  labels:
+    name: sanctumuser-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: sanctumuser-api

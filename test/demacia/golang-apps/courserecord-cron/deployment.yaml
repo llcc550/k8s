@@ -1,0 +1,21 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: demacia-courserecord-cron
+  namespace: demacia
+spec:
+  schedule: "00 01 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: demacia-courserecord-cron
+              image: swr.cn-east-3.myhuaweicloud.com/demacia/courserecord-cron:latest
+              args:
+                - ./app
+                - -f
+                - config.yaml
+          imagePullSecrets:
+            - name: image-pull-secret
+          restartPolicy: OnFailure

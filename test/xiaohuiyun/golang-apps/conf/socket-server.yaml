@@ -1,0 +1,29 @@
+---
+Name: socket-server
+Log:
+  Mode: console
+ListenOn: 0.0.0.0:30000
+Network: 124.71.163.192:30000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Device: device
+Etcd:
+  Hosts:
+    - etcd.xiaohuiyun.svc.cluster.local:2379
+  Key: EdgeQueue
+Redis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+  Type: node
+  Pass: ''
+  Key: socket_01
+ConnRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+  Type: node
+  Pass: ''
+Tls:
+  IsOpen: false
+  PemFile: ""
+  KeyFile: ""
+AuthConfig:
+  AccessSecret: jd30o3y3gk5hptmj

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demacia-socket-server
+  name: demacia-socket-server
+  namespace: demacia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demacia-socket-server
+  template:
+    metadata:
+      labels:
+        app: demacia-socket-server
+      name: demacia-socket-server
+    spec:
+      containers:
+        - name: demacia-socket-server
+          image: swr.cn-east-3.myhuaweicloud.com/demacia/socket-server:latest
+          command: [ "./app", "-f", "config.yaml" ]
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demacia-socket-server
+  namespace: demacia
+  labels:
+    name: demacia-socket-server
+spec:
+  type: NodePort
+  ports:
+    - port: 2000
+      targetPort: 2000
+      nodePort: 32304
+  selector:
+    app: demacia-socket-server

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: xiaohuiyun
+  name: npm-serve-pv
+  labels:
+    pv: npm-serve-pv
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/npm-serve
+    server: 192.168.0.50
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: npm-serve-pv
+  namespace: xiaohuiyun
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      name: npm-serve-pv
+  volumeMode: Filesystem
+  volumeName: npm-serve-pv

@@ -1,0 +1,62 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: xy-homepage-api
+  name: xy-homepage-api
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: xy-homepage-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: xy-homepage-api
+    spec:
+      containers:
+        - name: php-nginx
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/xy-homepage-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: xy-homepage-api
+              mountPath: /html/uploads
+            - name: php-config
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
+            - name: nginx-config
+              mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: xy-homepage-api
+          persistentVolumeClaim:
+            claimName: xy-homepage-api
+        - name: nginx-config
+          configMap:
+            name: xy-homepage-api-nginx-config
+        - name: php-config
+          configMap:
+            name: xy-homepage-api-php-config
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: xy-homepage-api
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: xy-homepage-api
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80

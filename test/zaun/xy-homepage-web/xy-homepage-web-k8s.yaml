@@ -1,0 +1,50 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: xy-homepage-web
+  name: xy-homepage-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: xy-homepage-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: xy-homepage-web
+    spec:
+      containers:
+        - name: xy-homepage-web
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/xy-homepage-web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              subPath: nginx.conf
+              name: nginx-config
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: xy-homepage-web-nginx-config
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: xy-homepage-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: xy-homepage-web
+  ports:
+    - port: 80
+      targetPort: 80

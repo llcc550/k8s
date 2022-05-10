@@ -1,0 +1,30 @@
+Name: zuy.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    ZuyPolice: zuy_police
+    ZuyVisitor: zuy_visitor
+    ZuyConfig: zuy_config
+    ZuyBlacklist: zuy_blacklist
+    ZuyLog: zuy_log
+    ZuyApk: zuy_apk
+    ZuyStudent: zuy_student
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+FaceRpc:
+  Endpoints:
+    - face-rpc.xiaohuiyun.svc.cluster.local:2000
+DevicePositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+PushGatewayRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000
+OpenApiAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj

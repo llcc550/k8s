@@ -1,0 +1,24 @@
+---
+Name: form.api
+Host: 0.0.0.0
+Port: 2000
+Mongo:
+  Url: mongodb.database.svc.cluster.local:27017
+  Database: tools
+  Collection:
+    Application: application
+    Record: record
+CacheRedis:
+  Host: redis-xiaohuiyun.database.svc.cluster.local:6379
+ElasticSearch:
+  Hosts:
+    - http://elasticsearch.database.svc.cluster.local:9200/
+  User: elastic
+  Pass: es@dinghao
+  Form:
+    Index: form
+    Type: data
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj

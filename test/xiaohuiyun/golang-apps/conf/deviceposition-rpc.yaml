@@ -1,0 +1,24 @@
+---
+Name: deviceposition.rpc
+ListenOn: 0.0.0.0:2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Position: position
+    DevicePositionType: device_position_type
+    Device: device
+    DeviceConfig: device_config
+    DeviceSdk: device_sdk
+    DeviceLogFiles: device_log_files
+    HwcCityWeather: hwccityweather
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+TimetableRpc:
+  Endpoints:
+    - timetable-rpc.xiaohuiyun.svc.cluster.local:2000
+PushRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000

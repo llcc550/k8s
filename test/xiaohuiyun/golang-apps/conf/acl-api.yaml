@@ -1,0 +1,20 @@
+---
+Name: acl.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Acl: acl
+    AclActions: acl_actions
+    AclCategories: acl_categories
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+AppAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj

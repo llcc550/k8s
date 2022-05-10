@@ -1,0 +1,57 @@
+---
+Name: wisdomteaching.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Timeout: 60000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    OnlineTraining: wisdom_teaching_online_training
+    OnlineTrainingAttend: wisdom_teaching_online_training_attend
+    OnlineTrainingComment: wisdom_teaching_online_training_comment
+    OnlineTrainingEvaluate: wisdom_teaching_online_training_evaluate
+    OnlineTrainingReply: wisdom_teaching_online_training_reply
+    OnlineTrainingSpeaker: wisdom_teaching_online_training_speaker
+    ThemeDiscussion: wisdom_teaching_theme_discussion
+    ThemeDiscussionAttend: wisdom_teaching_theme_discussion_attend
+    ThemeDiscussionComment: wisdom_teaching_theme_discussion_comment
+    ThemeDiscussionEvaluate: wisdom_teaching_theme_discussion_evaluate
+    ThemeDiscussionReply: wisdom_teaching_theme_discussion_reply
+    ThemeDiscussionSpeaker: wisdom_teaching_theme_discussion_speaker
+    Competition: wisdom_teaching_competition
+    CompetitionAttend: wisdom_teaching_competition_attend
+    CompetitionComment: wisdom_teaching_competition_comment
+    CompetitionEvaluate: wisdom_teaching_competition_evaluate
+    CompetitionReply: wisdom_teaching_competition_reply
+    CompetitionSpeaker: wisdom_teaching_competition_speaker
+    CompetitionConfig: wisdom_teaching_config
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+AttachmentRpc:
+  Endpoints:
+    - attachment-rpc.xiaohuiyun.svc.cluster.local:2000
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000
+Addressbook:
+  Endpoints:
+    - addressbook-rpc.xiaohuiyun.svc.cluster.local:2000
+TenantRpc:
+  Endpoints:
+    - tenant-rpc.xiaohuiyun.svc.cluster.local:2000
+SubjectRpc:
+  Endpoints:
+    - subject-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - department-rpc.xiaohuiyun.svc.cluster.local:2000

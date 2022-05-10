@@ -1,0 +1,17 @@
+---
+Name: demacia.websocket.server.3
+Log:
+  Mode: console
+ListenOn: 0.0.0.0:2000
+Addr: 124.71.163.192:32303
+Tube: &tube websocket_3
+CacheRedis:
+  Host: demacia-redis.demacia.svc.cluster.local:6379
+Brokers:
+  - my-cluster-kafka-0.kafka.svc.cluster.local:9094
+  - my-cluster-kafka-1.kafka.svc.cluster.local:9094
+  - my-cluster-kafka-2.kafka.svc.cluster.local:9094
+Group: *tube
+Topic: *tube
+Offset: last
+Consumers: 1

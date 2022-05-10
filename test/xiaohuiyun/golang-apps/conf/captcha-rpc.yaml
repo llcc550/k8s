@@ -1,0 +1,7 @@
+---
+Name: captcha.rpc
+Log:
+  Mode: console
+ListenOn: 0.0.0.0:2000
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379

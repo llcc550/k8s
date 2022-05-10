@@ -1,0 +1,47 @@
+---
+Name: openapi.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    App: openapi_app
+    AppOrganization: openapi_app_organization
+    Ticket: openapi_user_ticket
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+AuthConfig:
+  AccessSecret: jd30o3y3gk5hptmj
+  AccessExpire: 7200
+UserRpc:
+  Endpoints:
+    - user-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - department-rpc.xiaohuiyun.svc.cluster.local:2000
+SubjectRpc:
+  Endpoints:
+    - subject-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+TenantRpc:
+  Endpoints:
+    - tenant-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+TimetableRpc:
+  Endpoints:
+    - timetable-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+WechatPushRpc:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000

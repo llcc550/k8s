@@ -1,0 +1,51 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: web-h5
+  name: web-h5
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: web-h5
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-h5
+    spec:
+      containers:
+        - name: web-h5
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/web-h5:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              subPath: nginx.conf
+              name: nginx-config
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: web-h5-nginx-config
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-h5
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: web-h5
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80

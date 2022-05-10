@@ -1,0 +1,10 @@
+---
+Name: connection.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Etcd:
+  Hosts:
+    - etcd.xiaohuiyun.svc.cluster.local:2379
+  Key: socket-server

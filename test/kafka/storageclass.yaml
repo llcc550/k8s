@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-provisioner
+  labels:
+    app: nfs-client-provisioner
+  namespace: kafka
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: quay.io/external_storage/nfs-client-provisioner:latest
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: kafka-nfs-storage-provisioner
+            - name: NFS_SERVER
+              value: 192.168.0.217
+            - name: NFS_PATH
+              value: /data/nfs/kafka
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: 192.168.0.217
+            path: /data/nfs/kafka
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: kafka-nfs-storage
+provisioner: kafka-nfs-storage-provisioner
+parameters:
+  archiveOnDelete: "false"

@@ -1,0 +1,51 @@
+---
+Name: studentparent.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Students: students
+    Parents: parents
+    StudentParent: student_parent
+    StudentParentVerify: student_parent_verify
+    StudentJxtMobile: Student_jxt_mobile
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+CardRpc:
+  Endpoints:
+    - card-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+UserRpc:
+  Endpoints:
+    - user-rpc.xiaohuiyun.svc.cluster.local:2000
+TenantRpc:
+  Endpoints:
+    - tenant-rpc.xiaohuiyun.svc.cluster.local:2000
+TimetableRpc:
+  Endpoints:
+    - timetable-rpc.xiaohuiyun.svc.cluster.local:2000
+FaceRpc:
+  Endpoints:
+    - face-rpc.xiaohuiyun.svc.cluster.local:2000
+PdfRpc:
+  Endpoints:
+    - pdf-rpc.xiaohuiyun.svc.cluster.local:2000
+SanctumAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+AppAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+Callback: http://studentparent-api.xiaohuiyun.svc.cluster.local:2000

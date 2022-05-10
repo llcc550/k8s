@@ -1,0 +1,25 @@
+---
+Name: cloudscreennotice.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Event: class_board_events
+    EventClass: class_board_event_classes
+    Photo: class_board_photos
+    Media: class_board_media
+    MediaClass: class_board_media_classes
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+PositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+SocketPushRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000

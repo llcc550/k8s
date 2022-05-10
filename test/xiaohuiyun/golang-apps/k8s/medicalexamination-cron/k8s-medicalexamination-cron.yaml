@@ -1,0 +1,29 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: teacherattendance-cron
+  namespace: xiaohuiyun
+spec:
+  schedule: "30 23 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: conf
+              persistentVolumeClaim:
+                claimName: conf
+          containers:
+            - name: teacherattendance-cron
+              image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/teacherattendance-cron:latest
+              volumeMounts:
+                - name: conf
+                  mountPath: /app/etc
+              args:
+                - /app/teacherattendance-cron
+                - -f
+                - /app/etc/teacherattendance-cron.yaml
+          imagePullSecrets:
+            - name: image-pull-secret
+          restartPolicy: OnFailure

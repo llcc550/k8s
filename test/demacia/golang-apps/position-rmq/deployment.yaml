@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demacia-position-rmq
+  name: demacia-position-rmq
+  namespace: demacia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demacia-position-rmq
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: demacia-position-rmq
+      name: demacia-position-rmq
+    spec:
+      containers:
+        - name: demacia-position-rmq
+          image: swr.cn-east-3.myhuaweicloud.com/demacia/position-rmq:latest
+          command: [ "./app", "-f", "config.yaml" ]
+      imagePullSecrets:
+        - name: image-pull-secret

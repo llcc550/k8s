@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demacia-websocket-server-2
+  name: demacia-websocket-server-2
+  namespace: demacia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demacia-websocket-server-2
+  template:
+    metadata:
+      labels:
+        app: demacia-websocket-server-2
+      name: demacia-websocket-server-2
+    spec:
+      containers:
+        - name: demacia-websocket-server-2
+          image: swr.cn-east-3.myhuaweicloud.com/demacia/websocket-server-2:latest
+          command: [ "./app", "-f", "config.yaml" ]
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demacia-websocket-server-2
+  namespace: demacia
+  labels:
+    name: demacia-websocket-server-2
+spec:
+  type: NodePort
+  ports:
+    - port: 2000
+      targetPort: 2000
+      nodePort: 32302
+  selector:
+    app: demacia-websocket-server-2

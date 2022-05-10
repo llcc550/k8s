@@ -1,0 +1,11 @@
+---
+Name: user.rpc
+Log:
+  Mode: console
+ListenOn: 0.0.0.0:2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Users: users
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379

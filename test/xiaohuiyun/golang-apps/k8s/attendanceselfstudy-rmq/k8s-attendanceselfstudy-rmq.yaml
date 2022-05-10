@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: attendanceselfstudy-rmq
+  name: attendanceselfstudy-rmq
+  namespace: xiaohuiyun
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attendanceselfstudy-rmq
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: attendanceselfstudy-rmq
+      name: attendanceselfstudy-rmq
+    spec:
+      volumes:
+        - name: conf
+          persistentVolumeClaim:
+            claimName: conf
+      containers:
+        - name: attendanceselfstudy-rmq
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/attendanceselfstudy-rmq:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "./attendanceselfstudy-rmq", "-f", "etc/attendanceselfstudy-rmq.yaml" ]
+          volumeMounts:
+            - name: conf
+              mountPath: /app/etc
+          resources: { }
+          securityContext:
+            privileged: false
+            procMount: Default
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30

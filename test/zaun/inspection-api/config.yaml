@@ -1,0 +1,44 @@
+---
+Name: zaun.inspection.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+ManagerAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+  RefreshSecret: v4zj9kk63u2yt77l
+AdminAuth:
+  AccessSecret: 8wdmckpyut24bi6n
+  RefreshSecret: flzthdo5v7m6aksb
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/inspection?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Symptom: symptom
+    Teacher: teacher
+    Student: student
+    Organization: organization
+    StudentSymptomDate: student_symptom_date
+    OrgUser: org_user
+    AdminUser: admin_user
+    Device: device
+    CommitLog: commit_log
+    CommitLogStudent: commit_log_student
+    UserFaceInfo: user_face_info
+    Apk: apk
+    ApkOrganization: apk_organization
+CacheRedis:
+  Host: redis-zaun.database.svc.cluster.local:6379
+  Pass: ""
+  Type: "node"#cluster
+  Db: 1
+MinioConfig:
+  Endpoint: http://minio.dinghaotech.com
+  AccessKeyId: minio-user
+  AccessKeySecret: minio-user-pass
+  BucketName: inspection
+BaseConfig:
+  AppID: wx937e75f1bd84382e
+  AppSecret: e11c4d5998b8eb768948a62d59574f88
+  FaceQueueEndpoint: beanstalkd.database.svc.cluster.local:11300
+  FaceQueueTube: inspection-face
+  BaseUrl: http://inspection.dinghaotech.com

@@ -1,0 +1,29 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: turnstile-cron
+  namespace: xiaohuiyun
+spec:
+  schedule: "05 00 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: conf
+              persistentVolumeClaim:
+                claimName: conf
+          containers:
+            - name: turnstile-cron
+              image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/turnstile-cron:latest
+              volumeMounts:
+                - name: conf
+                  mountPath: /app/etc
+              args:
+                - /app/turnstile-cron
+                - -f
+                - /app/etc/turnstile-cron.yaml
+          imagePullSecrets:
+            - name: image-pull-secret
+          restartPolicy: OnFailure

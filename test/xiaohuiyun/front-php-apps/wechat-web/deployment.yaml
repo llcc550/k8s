@@ -1,0 +1,47 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: wechat-web
+  name: wechat-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: wechat-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wechat-web
+    spec:
+      containers:
+        - name: wechat-web
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/wechat-web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 500m
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: wechat-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: wechat-web
+  ports:
+    - port: 80
+      targetPort: 80

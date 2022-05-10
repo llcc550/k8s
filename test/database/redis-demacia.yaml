@@ -1,0 +1,22 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: redis-demacia
+  namespace: database
+subsets:
+  - addresses:
+      - ip: 192.168.0.200
+    ports:
+      - port: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-demacia
+  namespace: database
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      targetPort: 6379
+      nodePort: 32600

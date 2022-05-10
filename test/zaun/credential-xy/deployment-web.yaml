@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: credential-web
+  name: credential-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: credential-web
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: credential-web
+    spec:
+      containers:
+        - name: credential-web
+          image: harbor.service.xiaoyangedu.net/unite/kx-wuxixiaoyang-credential-web:v1.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: credential-web
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: credential-web
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80

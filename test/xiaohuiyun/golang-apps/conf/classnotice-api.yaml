@@ -1,0 +1,47 @@
+---
+Name: classnotice.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    ClassNotices: class_notices
+    ClassNoticeReceivers: class_notice_receivers
+    ClassNoticeComments: class_notice_comments
+    ClassNoticeCommentReplies: class_notice_comment_replies
+    ClassNoticeClasses: class_notice_classes
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+TimetableRpc:
+  Endpoints:
+    - timetable-rpc.xiaohuiyun.svc.cluster.local:2000
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+AttachmentRpc:
+  Endpoints:
+    - attachment-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatGateWayRpc:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+SmsPushRpc:
+  Endpoints:
+    - sms-rpc.xiaohuiyun.svc.cluster.local:2000

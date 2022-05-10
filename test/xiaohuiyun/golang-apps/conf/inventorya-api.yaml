@@ -1,0 +1,43 @@
+---
+Name: inventorya.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    InventoryVerifier: inventorya_verifier
+    InventoryStorage: inventorya_storage
+    InventoryRecords: inventorya_records
+    InventoryPosition: inventorya_position
+    InventoryGoodsCategory: inventorya_goods_category
+    InventoryGoods: inventorya_goods
+    InventoryCheckoutAmount: inventorya_checkout_amount
+    InventoryCheckout: inventorya_checkout
+    InventoryCheck: inventorya_check
+    InventoryPurchase: inventorya_purchase
+    InventoryPurchaseRules: inventorya_purchase_rules
+    InventoryPurchaseRuleMembersSuit: inventorya_purchase_rule_members_suit
+    InventoryPurchaseRuleMembers: inventorya_purchase_rule_members
+    InventoryPurchaseGoodsDetail: inventorya_purchase_goods_detail
+    InventoryPurchaseDetail: inventorya_purchase_detail
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - department-rpc.xiaohuiyun.svc.cluster.local:2000
+WechatPushRpc:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+AclCategory: inventorya

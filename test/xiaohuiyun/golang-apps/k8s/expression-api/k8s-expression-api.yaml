@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: expression-api
+  name: expression-api
+  namespace: xiaohuiyun
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expression-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: expression-api
+      name: expression-api
+    spec:
+      volumes:
+        - name: conf
+          persistentVolumeClaim:
+            claimName: conf
+      containers:
+        - name: expression-api
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/expression-api:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "./expression-api", "-f", "etc/expression-api.yaml" ]
+          volumeMounts:
+            - name: conf
+              mountPath: /app/etc
+          resources: { }
+          securityContext:
+            privileged: false
+            procMount: Default
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expression-api
+  namespace: xiaohuiyun
+  labels:
+    name: expression-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: expression-api

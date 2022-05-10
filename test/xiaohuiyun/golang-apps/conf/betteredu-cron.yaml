@@ -1,0 +1,48 @@
+---
+Name: betteredu.cron
+Log:
+  Mode: console
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+BettereduConfig:
+  TenantId: 23
+  TenantTypeId: 5205
+  Appid: "202101"
+  Secret: caef6e9bdef7cd8b34bbc15b97bb70a8
+  BaseUrl: https://datacenter.betteredu-hn.com/
+  TokenApi: Token/GetToken
+  AreaApi: BaseInfo/GetAreaInfo
+  SchoolApi: BaseInfo/GetSchoolsInfo
+  StudentApi: BaseInfo/GetStudentsBySchools
+  TeacherApi: BaseInfo/GetTeachersBySchools
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    BettereduSchool: betteredu_school
+    BettereduClass: betteredu_class
+    BettereduTeacher: betteredu_teacher
+    BettereduStudent: betteredu_student
+TenantRpc:
+  Endpoints:
+    - tenant-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+UserRpc:
+  Endpoints:
+    - user-rpc.xiaohuiyun.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - department-rpc.xiaohuiyun.svc.cluster.local:2000
+SubjectRpc:
+  Endpoints:
+    - subject-rpc.xiaohuiyun.svc.cluster.local:2000

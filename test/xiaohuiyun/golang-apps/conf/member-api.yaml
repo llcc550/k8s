@@ -1,0 +1,44 @@
+---
+Name: member.api
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    OrganizationMembers: organization_members
+    DepartmentMembers: department_members
+    SubjectMembers: subject_members
+    OrganizationTeachings: organization_teachings
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+UserRpc:
+  Endpoints:
+    - user-rpc.xiaohuiyun.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - department-rpc.xiaohuiyun.svc.cluster.local:2000
+SubjectRpc:
+  Endpoints:
+    - subject-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+FaceRpc:
+  Endpoints:
+    - face-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+CardRpc:
+  Endpoints:
+    - card-rpc.xiaohuiyun.svc.cluster.local:2000
+PdfRpc:
+  Endpoints:
+    - pdf-rpc.xiaohuiyun.svc.cluster.local:2000
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+Callback: http://member-api.xiaohuiyun.svc.cluster.local:2000

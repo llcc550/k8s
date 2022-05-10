@@ -1,0 +1,21 @@
+---
+Name: organization.api
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Organization: organizations
+    OrganizationConfigs: organization_configs
+    WxConfig: wx_config
+    OrganizationBanners: organization_banners
+    OrganizationTerms: organization_terms
+    OrganizationTermsDate: organization_terms_date
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+SanctumAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj

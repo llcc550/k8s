@@ -1,0 +1,62 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: training
+  name: training
+  namespace: zaun
+spec:
+  selector:
+    matchLabels:
+      app: training
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: training
+    spec:
+      containers:
+        - name: php-nginx
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/training:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: training
+              mountPath: /html/public/uploads
+            - name: php-config
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
+            - name: nginx-config
+              mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: training
+          persistentVolumeClaim:
+            claimName: training
+        - name: nginx-config
+          configMap:
+            name: training-nginx-config
+        - name: php-config
+          configMap:
+            name: training-php-config
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: training
+  namespace: zaun
+spec:
+  selector:
+    app: training
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80

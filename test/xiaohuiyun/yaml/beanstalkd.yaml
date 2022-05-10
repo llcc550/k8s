@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: beanstalkd
+  namespace: xiaohuiyun
+  labels:
+    app: beanstalkd
+spec:
+  type: ClusterIP
+  ports:
+    - name: beanstalkd
+      port: 11300
+      targetPort: 11300
+  selector:
+    app: beanstalkd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beanstalkd
+  namespace: xiaohuiyun
+  labels:
+    app: beanstalkd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beanstalkd
+  template:
+    metadata:
+      labels:
+        app: beanstalkd
+    spec:
+      containers:
+        - name: beanstalkd
+          image: swr.cn-east-3.myhuaweicloud.com/wx-xiaoyang-public/beanstalkd:1.10-amd64
+          command:
+            - "sh"
+            - "-c"
+            - "beanstalkd -p 11300 -z 10485760"
+          ports:
+            - containerPort: 11300

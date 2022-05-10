@@ -1,0 +1,25 @@
+---
+Name: expression.api
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    ExpressionCategory: expression_categories
+    ExpressionComment: expression_comments
+    ExpressionGroupStudent: expression_group_students
+    ExpressionGroup: expression_groups
+    ExpressionSet: expression_sets
+    ExpressionStudent: expression_students
+    Expression: expressions
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+PositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000

@@ -1,0 +1,18 @@
+---
+Name: face.rpc
+ListenOn: 0.0.0.0:2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    UserFaceInfo: user_face_info
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+BaiduFaceConfig:
+  ClientId: u1yInAGu7BvqZYPgNzps8Izq
+  ClientSecret: tAaB3zfyQbYrZQWcSxjmpC1B9DZIxElu
+ArcSoftFaceQueue:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: face
+TurnstileQueue:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: turnstile

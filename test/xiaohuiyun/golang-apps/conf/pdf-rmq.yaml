@@ -1,0 +1,26 @@
+---
+Name: pdf.rmq
+Log:
+  Mode: console
+RootDirectory: /app/etc/files/
+OssConfig: 2 # 1:aliyun，2:minio，3:huawei
+AliyunOssConfig:
+  Endpoint: https://oss-cn-hangzhou.aliyuncs.com
+  AccessKeyId: LTAI4G2Vcr8fFsTFGVgyyp6d
+  AccessKeySecret: xhfmUE843aE2l4iJIknfw5ue4yZWxo
+  BucketName: ujy-test
+  ObjectUrl: https://ujy-test.oss-cn-hangzhou.aliyuncs.com
+HuaweiObsConfig:
+  Endpoint: obs.cn-east-3.myhuaweicloud.com
+  AccessKeyId: 0LYNHSVNLVSB3IBDTXFN
+  AccessKeySecret: HahQCGzvvNN0kfEFOeoSNKVHx9WoU9SlU7leWQyx
+  BucketName: u-test
+  ObjectUrl: http://u-test.obs.cn-east-3.myhuaweicloud.com
+MinioConfig:
+  Endpoint: http://minio.dinghaotech.com
+  AccessKeyId: minio-user
+  AccessKeySecret: minio-user-pass
+  BucketName: file
+Queue:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: pdf

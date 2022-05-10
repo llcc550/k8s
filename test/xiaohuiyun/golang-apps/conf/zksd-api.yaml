@@ -1,0 +1,21 @@
+---
+Name: zksd.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: ujy-read-write:rW-xhy2020@@tcp(172.16.0.179:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    QhSchool: qh_school
+    QhDepartment: qh_department
+    QhClass: qh_class
+    QhDepartmentMembers: qh_department_members
+    QhStudent: qh_student
+    QhTenantType: qh_tenant_type
+    QhGrade: qh_grade
+    QhMembers: qh_members
+    ZksdConfig: zksd_config
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+EventUrl: http://cloudscreennotice-api.xiaohuiyun.svc.cluster.local:2000/event/add

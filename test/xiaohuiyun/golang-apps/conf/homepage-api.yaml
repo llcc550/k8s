@@ -1,0 +1,36 @@
+---
+Name: homepage.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    WebAlbums: web_albums
+    WebNews: web_news
+    WebNewsCategories: web_news_categories
+    WebNewsCategoriesNews: web_news_category_news
+    WebNewsReports: web_news_reports
+    WebNewsVisits: web_news_visits
+    WebComments: web_comments
+    WebCommentReplies: web_comment_replies
+    WebVideos: web_videos
+    WebBlogs: web_blogs
+    WebBlogCategory: web_blog_categories
+    WebWeikes: web_weikes
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+Tube: webnews
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+SubjectRpc:
+  Endpoints:
+    - subject-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000

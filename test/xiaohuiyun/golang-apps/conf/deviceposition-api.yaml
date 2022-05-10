@@ -1,0 +1,58 @@
+---
+Name: deviceposition.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+MaxBytes: 8388608
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Position: position
+    DevicePositionType: device_position_type
+    Device: device
+    DeviceConfig: device_config
+    DeviceSdk: device_sdk
+    DeviceLogFiles: device_log_files
+    HwcCityWeather: hwccityweather
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+StatusRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+TimetableRpc:
+  Endpoints:
+    - timetable-rpc.xiaohuiyun.svc.cluster.local:2000
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+PushRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000
+ApkRpc:
+  Endpoints:
+    - apk-rpc.xiaohuiyun.svc.cluster.local:2000
+DormRpc:
+  Endpoints:
+    - dorm-rpc.xiaohuiyun.svc.cluster.local:2000
+PdfRpc:
+  Endpoints:
+    - pdf-rpc.xiaohuiyun.svc.cluster.local:2000
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+AppAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+SanctumAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+BoardAuth:
+  AccessSecret: jd30o3y3gk5hptmj

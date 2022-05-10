@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: xy-homepage-api
+  namespace: xiaohuiyun
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  selector:
+    matchLabels:
+      name: xy-homepage-api
+  volumeMode: Filesystem
+  volumeName: xy-homepage-api

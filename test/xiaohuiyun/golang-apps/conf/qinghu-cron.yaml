@@ -1,0 +1,27 @@
+---
+Name: qinghu.cron
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    QhSchool: qh_school
+    QhDepartment: qh_department
+    QhClass: qh_class
+    QhDepartmentMembers: qh_department_members
+    QhStudent: qh_student
+    QhTenantType: qh_tenant_type
+    QhGrade: qh_grade
+    QhAccount: qh_account
+    QhMembers: qh_members
+    QhParents: qh_parents
+    QhStudentParents: qh_student_parents
+    QhConfig: qh_config
+    QhClassRoom: qh_class_room
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+QingHuConfig:
+  TenantId: 23
+  AppToken: 2f221f5f-95f4-4fd8-9a1c-834c119dc011
+  BaseUrl: http://xysjztdemoapi.xiaoyangedu.com/openapi/output/
+  AreaUrl: BasicInformationModular/GetSchoolInfo

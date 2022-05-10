@@ -1,0 +1,21 @@
+---
+Name: studentparent.rmq
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Students: students
+    Parents: parents
+    StudentParent: student_parent
+    StudentParentVerify: student_parent_verify
+    StudentJxtMobile: Student_jxt_mobile
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+PdfRpc:
+  Endpoints:
+    - pdf-rpc.xiaohuiyun.svc.cluster.local:2000
+Queue:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: studentparent
+Callback: http://studentparent-api.xiaohuiyun.svc.cluster.local:2000

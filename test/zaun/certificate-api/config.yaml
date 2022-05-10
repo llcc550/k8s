@@ -1,0 +1,51 @@
+---
+Name: zaun.certificate.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/certificate?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Member: member
+    Receiver: receiver
+    Activity: activity
+    Key: template_key
+    Medal: medal
+    Template: template
+    Value: value
+    Area: area
+Auth:
+  AccessSecret: jd30o3y3gk5hptmj
+  RefreshSecret: v4zj9kk63u2yt77l
+  AccessExpire: 43200
+  RefreshExpire: 86400
+  RefreshAfter: 21600
+ReceiverAuth:
+  AccessSecret: 8wdmckpyut24bi6n
+  RefreshSecret: flzthdo5v7m6aksb
+  AccessExpire: 43200
+  RefreshExpire: 86400
+  RefreshAfter: 21600
+CacheRedis:
+  Host: redis-zaun.database.svc.cluster.local:6379
+  Type: node
+  Pass: ''
+  Db: 0
+MinioConfig:
+  Endpoint: http://minio.dinghaotech.com
+  AccessKeyId: minio-user
+  AccessKeySecret: minio-user-pass
+  BucketName: certificate
+HuaweiSmsConfig:
+  BaseSendUrl: 'https://smsapi.cn-north-4.myhuaweicloud.com:443/sms/batchSendSms/v1'
+  Signature: '晓慧云'
+  AppKey: '5aZLB3C4CaG219y2XBZSZ7J5BX9o'
+  AppSecret: 'FVclrEpR0IDXCZdNm3u3XkPbHHLI'
+  Templates:
+    captcha:
+      TemplateSign: '8822012423891'
+      TemplateId: 'a2d4a26f1e924df8bf486566dd8bd231'
+    msg:
+      TemplateSign: '8822012423905'
+      TemplateId: '54ab3eaaf4e44fb8bf4f8fab7756c303'

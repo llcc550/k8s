@@ -1,0 +1,41 @@
+---
+Name: dorm.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Dorm: dorm
+    DormRoom: dorm_room
+    StudentDorm: student_dorm
+    DormRatingCategory: dorm_rating_category
+    StudentApplyDorm: student_apply_dorm
+    DormRating: dorm_rating
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+StudentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatPushRpc:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+SanctumAuth:
+  AccessSecret: jd30o3y3gk5hptmj

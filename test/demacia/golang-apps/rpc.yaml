@@ -1,0 +1,81 @@
+Name: ""
+Host: 0.0.0.0
+Port: 2000
+ListenOn: 0.0.0.0:2000
+Postgres:
+  DataSource: postgres://postgres:dinghao8888@postgres.database.svc.cluster.local:5432/demacia?sslmode=disable
+CacheRedis:
+  Host: demacia-redis.demacia.svc.cluster.local:6379
+Brokers:
+  - my-cluster-kafka-0.kafka.svc.cluster.local:9094
+  - my-cluster-kafka-1.kafka.svc.cluster.local:9094
+  - my-cluster-kafka-2.kafka.svc.cluster.local:9094
+Group: ""
+Topic: ""
+Mongo:
+  Url: mongodb.database.svc.cluster.local:27017/demacia
+  Collection:
+    Log: log
+CapacityRpc:
+  Endpoints:
+    - demacia-capacity-rpc.demacia.svc.cluster.local:2000
+CardRpc:
+  Endpoints:
+    - demacia-card-rpc.demacia.svc.cluster.local:2000
+ClassRpc:
+  Endpoints:
+    - demacia-class-rpc.demacia.svc.cluster.local:2000
+CommonRpc:
+  Endpoints:
+    - demacia-common-rpc.demacia.svc.cluster.local:2000
+CourseTableRpc:
+  Endpoints:
+    - demacia-coursetable-rpc.demacia.svc.cluster.local:2000
+DataBusRpc:
+  Endpoints:
+    - demacia-databus-rpc.demacia.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - demacia-department-rpc.demacia.svc.cluster.local:2000
+DeviceRpc:
+  Endpoints:
+    - demacia-device-rpc.demacia.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - demacia-member-rpc.demacia.svc.cluster.local:2000
+OrgRpc:
+  Endpoints:
+    - demacia-organization-rpc.demacia.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - demacia-organization-rpc.demacia.svc.cluster.local:2000
+PositionRpc:
+  Endpoints:
+    - demacia-position-rpc.demacia.svc.cluster.local:2000
+StudentRpc:
+  Endpoints:
+    - demacia-student-rpc.demacia.svc.cluster.local:2000
+SubjectRpc:
+  Endpoints:
+    - demacia-subject-rpc.demacia.svc.cluster.local:2000
+TagsRpc:
+  Endpoints:
+    - demacia-tags-rpc.demacia.svc.cluster.local:2000
+UserRpc:
+  Endpoints:
+    - demacia-user-rpc.demacia.svc.cluster.local:2000
+WebsocketRpc:
+  Endpoints:
+    - demacia-websocket-rpc.demacia.svc.cluster.local:2000
+PermissionRpc:
+  Endpoints:
+    - demacia-permission-rpc.demacia.svc.cluster.local:2000
+FaceRpc:
+  Endpoints:
+    - demacia-face-rpc.demacia.svc.cluster.local:2000
+SocketRpc:
+  Endpoints:
+    - demacia-socket-rpc.demacia.svc.cluster.local:2000
+DevicecontrolRpc:
+  Endpoints:
+    - demacia-devicecontrol-rpc.demacia.svc.cluster.local:2000

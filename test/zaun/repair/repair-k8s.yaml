@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: repair
+  name: repair
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: repair
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: repair
+    spec:
+      containers:
+        - name: php-nginx
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/repair:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: php-config
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
+            - name: nginx-config
+              mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: repair-nginx-config
+        - name: php-config
+          configMap:
+            name: repair-php-config
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: repair
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: repair
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80

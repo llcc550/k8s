@@ -1,0 +1,60 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sanctum-web-nginx-config
+  namespace: xiaohuiyun
+data:
+  nginx.conf: |
+    worker_processes  auto;
+
+    events {
+        use epoll;
+        worker_connections  65535;
+    }
+
+    http {
+        include       mime.types;
+        default_type  application/octet-stream;
+        charset       utf-8;
+        sendfile       on;
+        tcp_nopush     on;
+        server_tokens  off;
+        reset_timedout_connection on;
+        send_timeout 10;
+        keepalive_timeout  65;
+        gzip on;
+        gzip_vary      on;
+        gzip_disable "msie6";
+        gzip_proxied any;
+        gzip_min_length 1000;
+        gzip_comp_level 4;
+        gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+        gzip_buffers 4 16k;
+        open_file_cache max=200000 inactive=20s;
+        open_file_cache_valid 30s;
+        open_file_cache_min_uses 2;
+        open_file_cache_errors on;
+        client_max_body_size 200m;
+        client_body_buffer_size 200m;
+        client_body_temp_path /tmp;
+        client_header_buffer_size 4k;
+        client_header_timeout 10;
+        client_body_timeout 10;
+        fastcgi_cache_path /tmp/ levels=1:2 keys_zone=TEST:10m inactive=5m;
+        fastcgi_connect_timeout 600;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+        fastcgi_buffers 16 256k;
+        fastcgi_buffer_size 128k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_temp_file_write_size 256k;
+        fastcgi_intercept_errors on;
+        server {
+            listen 80;
+            location / {
+                root /www;
+                index index.php index.html index.htm ;
+                add_header Cache-Control no-store;
+            }
+        }
+    }

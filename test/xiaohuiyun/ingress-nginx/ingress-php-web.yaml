@@ -1,0 +1,114 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: front-php-ingress
+  namespace: xiaohuiyun
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT,GET,POST,OPTIONS,DELETE"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "ujy-session,User-Agent,Keep-Alive,Content-Type,Origin,Accept,Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 2048M
+    nginx.ingress.kubernetes.io/client-max-body-size: 2048M
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 2048M
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 1200s
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 1200s
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+spec:
+  rules:
+    - host: "*.dinghaotech.com"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web
+              servicePort: 80
+    - host: web-api.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web-api
+              servicePort: 9501
+    - host: wechat-api.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wechat-web-api
+              servicePort: 8088
+    - host: wechat.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wechat-web
+              servicePort: 80
+    - host: web-h5.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web-h5
+              servicePort: 80
+    - host: sanctum.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: sanctum-web
+              servicePort: 80
+    - host: board-api.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: board-api
+              servicePort: 80
+    - host: training.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: training
+              servicePort: 80
+    - host: training-h5.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: training-h5
+              servicePort: 80
+    - host: xy-homepage-api.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: xy-homepage-api
+              servicePort: 80
+    - host: xy-homepage-web.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: xy-homepage-web
+              servicePort: 80
+    - host: repair.dinghaotech.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: repair
+              servicePort: 80
+    - host: homepage.xiaojy.net
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: xy-homepage-web
+              servicePort: 80

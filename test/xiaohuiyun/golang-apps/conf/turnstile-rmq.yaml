@@ -1,0 +1,32 @@
+---
+Name: turnstile.rmq
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    TurnstileHeartbeat: turnstile_heartbeat
+    TurnstileEventDevice: turnstile_event_device
+    TurnstileLog: turnstile_log
+    TurnstileOrganization: turnstile_organization
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+FaceRpc:
+  Endpoints:
+    - face-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+DevicePositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+QueueConfig:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: turnstile
+AttendanceUrl: http://board-api.xiaohuiyun.svc.cluster.local:80/gate/receive

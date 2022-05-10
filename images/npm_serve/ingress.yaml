@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ujy-node-serve
+  namespace: xiaohuiyun
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT,GET,POST,OPTIONS,DELETE"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "ujy-session,User-Agent,Keep-Alive,Content-Type,Origin,Accept,Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 2048M
+    nginx.ingress.kubernetes.io/client-max-body-size: 2048M
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 2048M
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 1200s
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 1200s
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+spec:
+  rules:
+    - host: node-serve.u-jy.cn
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: npm-serve-service
+              servicePort: 5000
+  tls:
+    - hosts:
+        - node-serve.u-jy.cn
+      secretName: 2020-2022ujy

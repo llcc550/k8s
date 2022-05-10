@@ -1,0 +1,36 @@
+---
+Name: emancipation.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    EmancipationConfig: emancipation_config
+    EmancipationParentStudent: emancipation_parent_student
+    EmancipationStudent: emancipation_student
+    EmancipationTime: emancipation_time
+    EmancipationTimeWeekday: emancipation_time_weekday
+    EmancipationStudentHistory: emancipation_student_history
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+TimetableRpc:
+  Endpoints:
+    - timetable-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatGateWay:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+Tube: emancipation

@@ -1,0 +1,28 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: afterschoolservice-cron
+  namespace: xiaohuiyun
+spec:
+  schedule: "05 00 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: conf
+              persistentVolumeClaim:
+                claimName: conf
+          containers:
+            - name: afterschoolservice-cron
+              image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/afterschoolservice-cron:latest
+              volumeMounts:
+                - name: conf
+                  mountPath: /app/etc
+              args:
+                - /app/afterschoolservice-cron
+                - -f
+                - /app/etc/afterschoolservice-cron.yaml
+          imagePullSecrets:
+            - name: image-pull-secret
+          restartPolicy: OnFailure

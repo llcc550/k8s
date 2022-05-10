@@ -1,0 +1,29 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: zksd-cron
+  namespace: xiaohuiyun
+spec:
+  schedule: "00 */2 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: conf
+              persistentVolumeClaim:
+                claimName: conf
+          containers:
+            - name: zksd-cron
+              image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/zksd-cron:latest
+              volumeMounts:
+                - name: conf
+                  mountPath: /app/etc
+              args:
+                - /app/zksd-cron
+                - -f
+                - /app/etc/zksd-cron.yaml
+          imagePullSecrets:
+            - name: image-pull-secret
+          restartPolicy: OnFailure

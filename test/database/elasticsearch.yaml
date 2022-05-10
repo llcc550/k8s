@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    name: elasticsearch
+  name: elasticsearch
+  namespace: database
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/elasticsearch
+    server: 192.168.0.217
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: elasticsearch
+  namespace: database
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  selector:
+    matchLabels:
+      name: elasticsearch
+  volumeMode: Filesystem
+  volumeName: elasticsearch
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch
+  namespace: database
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+        - name: elasticsearch
+          image: swr.cn-east-3.myhuaweicloud.com/wx-xiaoyang-public/elasticsearch:7.16.2-amd64
+          ports:
+            - containerPort: 9200
+              name: es-cli
+            - containerPort: 9300
+              name: es-iner
+          env:
+            - name: discovery.type
+              value: single-node
+            - name: http.cors.enabled
+              value: "true"
+            - name: http.cors.allow-origin
+              value: "*"
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data/
+              name: elasticsearch
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+      volumes:
+        - name: elasticsearch
+          persistentVolumeClaim:
+            claimName: elasticsearch
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+  namespace: database
+spec:
+  type: ClusterIP
+  selector:
+    app: elasticsearch
+  ports:
+    - name: port9200
+      port: 9200
+      targetPort: 9200
+    - name: port9300
+      port: 9300
+      targetPort: 9300

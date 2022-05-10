@@ -1,0 +1,50 @@
+---
+Name: documentflow.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    DocumentManagements: document_managements
+    DocumentManagementMembers: document_management_members
+    DocumentManagementMembersLocal: document_management_members_local
+    DocumentManagementOrganizations: document_management_organizations
+    DocumentManagementsLevels: document_management_levels
+    DocumentManagementsLanguages: document_management_languages
+    DocumentManagementsCategories: document_management_categories
+    DocumentManagementsConfig: document_management_config
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+OrganizationRpc:
+  Endpoints:
+    - organization-rpc.xiaohuiyun.svc.cluster.local:2000
+AttachmentRpc:
+  Endpoints:
+    - attachment-rpc.xiaohuiyun.svc.cluster.local:2000
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000
+TenantRpc:
+  Endpoints:
+    - tenant-rpc.xiaohuiyun.svc.cluster.local:2000
+PushRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - department-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatGateWay:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+AddressbookRpc:
+  Endpoints:
+    - addressbook-rpc.xiaohuiyun.svc.cluster.local:2000
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj

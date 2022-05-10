@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-api
+  namespace: xiaohuiyun
+spec:
+  selector:
+    matchLabels:
+      app: web-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-api
+    spec:
+      containers:
+        - name: web-api
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/web-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9501
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 500m
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: image-pull-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-api
+  namespace: xiaohuiyun
+spec:
+  selector:
+    app: web-api
+  type: ClusterIP
+  ports:
+    - port: 9501
+      targetPort: 9501

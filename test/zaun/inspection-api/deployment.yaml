@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zaun-inspection-api
+  name: zaun-inspection-api
+  namespace: zaun
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zaun-inspection-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: zaun-inspection-api
+      name: zaun-inspection-api
+    spec:
+      containers:
+        - name: zaun-inspection-api
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/zaun-inspection-api:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "./zaun-inspection-api", "-f", "config.yaml" ]
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zaun-inspection-api
+  namespace: zaun
+  labels:
+    name: zaun-inspection-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: zaun-inspection-api

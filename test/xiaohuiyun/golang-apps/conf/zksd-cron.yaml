@@ -1,0 +1,20 @@
+---
+Name: zksd.cron
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    QhSchool: qh_school
+    QhDepartment: qh_department
+    QhClass: qh_class
+    QhDepartmentMembers: qh_department_members
+    QhStudent: qh_student
+    QhTenantType: qh_tenant_type
+    QhGrade: qh_grade
+    QhMembers: qh_members
+    ZksdConfig: zksd_config
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+  Type: node
+  Pass: ''

@@ -1,0 +1,40 @@
+---
+Name: sms.rpc
+Log:
+  Mode: console
+Push: true
+ListenOn: 0.0.0.0:2000
+LimitRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/sms?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    SmsTraffic: sms_traffic
+Limiter:
+  Expiry: 86400
+  KeyPrefix: sms#limit#
+  Quota: 12
+  Redis:
+    Host: redis.xiaohuiyun.svc.cluster.local:6379
+    Type: node
+    Pass: ""
+Huawei:
+  BaseSendUrl: 'https://rtcsms.cn-north-1.myhuaweicloud.com:10743/sms/batchSendSms/v1'
+  BatchSendUrl: 'https://rtcsms.cn-north-1.myhuaweicloud.com:10743/sms/batchSendDiffSms/v1'
+  AppKey: 'GALEzO79PGL98C5k6VsB6OEtHs5C'
+  AppSecret: 'j0997zd6NMSP1MAR0l7AjMA143re'
+  Templates:
+    captcha:
+      TemplateSign: '8821042508936'
+      TemplateId: '1c99aa86f19e499aab1e40478c1046e0'
+    visitor:
+      TemplateSign: '8821042508882'
+      TemplateId: 'ecb6e3c8bbec43d4bd085d0ecd41cda9'
+    stadium:
+      TemplateSign: '8821042508882'
+      TemplateId: 'd9f6605ec9514fcb9fd78a3bacc0a0e7'
+    remark:
+      TemplateSign: '8821042508882'
+      TemplateId: 'e12f46a4f14343559e9081a0c51dfba2'

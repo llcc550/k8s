@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demacia-parent-api
+  name: demacia-parent-api
+  namespace: demacia
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demacia-parent-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: demacia-parent-api
+      name: demacia-parent-api
+    spec:
+      containers:
+        - name: demacia-parent-api
+          image: swr.cn-east-3.myhuaweicloud.com/demacia/parent-api:latest
+          command: [ "./app", "-f", "config.yaml" ]
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demacia-parent-api
+  namespace: demacia
+  labels:
+    name: demacia-parent-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: demacia-parent-api

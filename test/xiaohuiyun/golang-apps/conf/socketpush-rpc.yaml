@@ -1,0 +1,9 @@
+---
+Name: socketpush.rpc
+ListenOn: 0.0.0.0:2000
+ConnRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+MsgQueueEtcd:
+  Hosts:
+    - etcd.xiaohuiyun.svc.cluster.local:2379
+  Key: socket_

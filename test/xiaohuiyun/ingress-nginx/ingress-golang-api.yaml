@@ -1,0 +1,305 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: golang-api-ingress
+  namespace: xiaohuiyun
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT,GET,POST,OPTIONS,DELETE"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type,Origin,Accept,Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 2048M
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 2048M
+spec:
+  rules:
+    - host: saas.dinghaotech.com
+      http:
+        paths:
+          - path: /(api/)inspection/?(.*)
+            backend:
+              serviceName: inspection-api
+              servicePort: 2000
+          - path: /api/form/?(.*)
+            backend:
+              serviceName: form-api
+              servicePort: 2000
+          - path: /api/acl/?(.*)
+            backend:
+              serviceName: acl-api
+              servicePort: 2000
+          - path: /api/medicalexamination/?(.*)
+            backend:
+              serviceName: medicalexamination-api
+              servicePort: 2000
+          - path: /api/inventory/?(.*)
+            backend:
+              serviceName: inventory-api
+              servicePort: 2000
+          - path: /api/inventorya/?(.*)
+            backend:
+              serviceName: inventorya-api
+              servicePort: 2000
+          - path: /api/inventoryb/?(.*)
+            backend:
+              serviceName: inventoryb-api
+              servicePort: 2000
+          - path: /api/zuy/?(.*)
+            backend:
+              serviceName: zuy-api
+              servicePort: 2000
+          - path: /api/openapi/?(.*)
+            backend:
+              serviceName: openapi-api
+              servicePort: 2000
+          - path: /api/turnstile/?(.*)
+            backend:
+              serviceName: turnstile-api
+              servicePort: 2000
+          - path: /api/attendanceselfstudy/?(.*)
+            backend:
+              serviceName: attendanceselfstudy-api
+              servicePort: 2000
+          - path: /api/pdf/?(.*)
+            backend:
+              serviceName: pdf-api
+              servicePort: 2000
+          - path: /api/document/?(.*)
+            backend:
+              serviceName: document-api
+              servicePort: 2000
+          - path: /api/remark/?(.*)
+            backend:
+              serviceName: remark-api
+              servicePort: 2000
+          - path: /api/repair/?(.*)
+            backend:
+              serviceName: repair-api
+              servicePort: 2000
+          - path: /api/award/?(.*)
+            backend:
+              serviceName: award-api
+              servicePort: 2000
+          - path: /api/afterschoolservice/?(.*)
+            backend:
+              serviceName: afterschoolservice-api
+              servicePort: 2000
+          - path: /api/examresult/?(.*)
+            backend:
+              serviceName: examresult-api
+              servicePort: 2000
+          - path: /api/captcha/?(.*)
+            backend:
+              serviceName: captcha-api
+              servicePort: 2000
+          - path: /api/afterschool/?(.*)
+            backend:
+              serviceName: afterschool-api
+              servicePort: 2000
+          - path: /api/organizationnotice/?(.*)
+            backend:
+              serviceName: organizationnotice-api
+              servicePort: 2000
+          - path: /api/recommendation/?(.*)
+            backend:
+              serviceName: recommendation-api
+              servicePort: 2000
+          - path: /api/emancipation/?(.*)
+            backend:
+              serviceName: emancipation-api
+              servicePort: 2000
+          - path: /api/letter/?(.*)
+            backend:
+              serviceName: letter-api
+              servicePort: 2000
+          - path: /api/leave/?(.*)
+            backend:
+              serviceName: leave-api
+              servicePort: 2000
+          - path: /api/trip/?(.*)
+            backend:
+              serviceName: trip-api
+              servicePort: 2000
+          - path: /api/homepage/?(.*)
+            backend:
+              serviceName: homepage-api
+              servicePort: 2000
+          - path: /api/planduty/?(.*)
+            backend:
+              serviceName: planduty-api
+              servicePort: 2000
+          - path: /api/classnotice/?(.*)
+            backend:
+              serviceName: classnotice-api
+              servicePort: 2000
+          - path: /api/exam/?(.*)
+            backend:
+              serviceName: exam-api
+              servicePort: 2000
+          - path: /api/studentattendance/?(.*)
+            backend:
+              serviceName: studentattendance-api
+              servicePort: 2000
+          - path: /api/pneumonia/?(.*)
+            backend:
+              serviceName: pneumonia-api
+              servicePort: 2000
+          - path: /api/dorm/?(.*)
+            backend:
+              serviceName: dorm-api
+              servicePort: 2000
+          - path: /api/auth/?(.*)
+            backend:
+              serviceName: auth-api
+              servicePort: 2000
+          - path: /api/documentflow/?(.*)
+            backend:
+              serviceName: documentflow-api
+              servicePort: 2000
+          - path: /api/apk/?(.*)
+            backend:
+              serviceName: apk-api
+              servicePort: 2000
+          - path: /api/messageboard/?(.*)
+            backend:
+              serviceName: messageboard-api
+              servicePort: 2000
+          - path: /api/classes/?(.*)
+            backend:
+              serviceName: classes-api
+              servicePort: 2000
+          - path: /api/face/?(.*)
+            backend:
+              serviceName: face-api
+              servicePort: 2000
+          - path: /api/transfer/?(.*)
+            backend:
+              serviceName: transfer-api
+              servicePort: 2000
+          - path: /api/message/?(.*)
+            backend:
+              serviceName: message-api
+              servicePort: 2000
+          - path: /api/stadium/?(.*)
+            backend:
+              serviceName: stadium-api
+              servicePort: 2000
+          - path: /api/connection/?(.*)
+            backend:
+              serviceName: connection-api
+              servicePort: 2000
+          - path: /api/teacherattendance/?(.*)
+            backend:
+              serviceName: teacherattendance-api
+              servicePort: 2000
+          - path: /api/sms/?(.*)
+            backend:
+              serviceName: sms-api
+              servicePort: 2000
+          - path: /api/meeting/?(.*)
+            backend:
+              serviceName: meeting-api
+              servicePort: 2000
+          - path: /api/homework/?(.*)
+            backend:
+              serviceName: homework-api
+              servicePort: 2000
+          - path: /api/cloudscreennotice/?(.*)
+            backend:
+              serviceName: cloudscreennotice-api
+              servicePort: 2000
+          - path: /api/studentparent/?(.*)
+            backend:
+              serviceName: studentparent-api
+              servicePort: 2000
+          - path: /api/mailbox/?(.*)
+            backend:
+              serviceName: mailbox-api
+              servicePort: 2000
+          - path: /api/organization/?(.*)
+            backend:
+              serviceName: organization-api
+              servicePort: 2000
+          - path: /api/timetable/?(.*)
+            backend:
+              serviceName: timetable-api
+              servicePort: 2000
+          - path: /api/rating/?(.*)
+            backend:
+              serviceName: rating-api
+              servicePort: 2000
+          - path: /api/expression/?(.*)
+            backend:
+              serviceName: expression-api
+              servicePort: 2000
+          - path: /api/sanctumuser/?(.*)
+            backend:
+              serviceName: sanctumuser-api
+              servicePort: 2000
+          - path: /api/classfeed/?(.*)
+            backend:
+              serviceName: classfeed-api
+              servicePort: 2000
+          - path: /api/memberattribute/?(.*)
+            backend:
+              serviceName: memberattribute-api
+              servicePort: 2000
+          - path: /api/addressbook/?(.*)
+            backend:
+              serviceName: addressbook-api
+              servicePort: 2000
+          - path: /api/member/?(.*)
+            backend:
+              serviceName: member-api
+              servicePort: 2000
+          - path: /api/subject/?(.*)
+            backend:
+              serviceName: subject-api
+              servicePort: 2000
+          - path: /api/department/?(.*)
+            backend:
+              serviceName: department-api
+              servicePort: 2000
+          - path: /api/visitor/?(.*)
+            backend:
+              serviceName: visitor-api
+              servicePort: 2000
+          - path: /api/module/?(.*)
+            backend:
+              serviceName: module-api
+              servicePort: 2000
+          - path: /api/deviceposition/?(.*)
+            backend:
+              serviceName: deviceposition-api
+              servicePort: 2000
+          - path: /api/customboard/?(.*)
+            backend:
+              serviceName: customboard-api
+              servicePort: 2000
+          - path: /api/cloudscreenmodule/?(.*)
+            backend:
+              serviceName: cloudscreenmodule-api
+              servicePort: 2000
+          - path: /api/salary/?(.*)
+            backend:
+              serviceName: salary-api
+              servicePort: 2000
+          - path: /api/wisdomteaching/?(.*)
+            backend:
+              serviceName: wisdomteaching-api
+              servicePort: 2000
+          - path: /api/planwork/?(.*)
+            backend:
+              serviceName: planwork-api
+              servicePort: 2000
+          - path: /api/zksd/?(.*)
+            backend:
+              serviceName: zksd-api
+              servicePort: 2000
+          - path: /api/planning/?(.*)
+            backend:
+              serviceName: planning-api
+              servicePort: 2000

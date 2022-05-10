@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zaun-certificate-api
+  name: zaun-certificate-api
+  namespace: zaun
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zaun-certificate-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: zaun-certificate-api
+      name: zaun-certificate-api
+    spec:
+      containers:
+        - name: zaun-certificate-api
+          image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/zaun-certificate-api:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "./zaun-certificate-api", "-f", "config.yaml" ]
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zaun-certificate-api
+  namespace: zaun
+  labels:
+    name: zaun-certificate-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: zaun-certificate-api

@@ -1,0 +1,34 @@
+---
+Name: document
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    CommunicateDocumentAgent: communicate_document_agents
+    CommunicateDocumentLanguage: communicate_document_languages
+    CommunicateDocumentReader: communicate_document_readers
+    CommunicateDocumentReply: communicate_document_replies
+    CommunicateDocument: communicate_documents
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+WebAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+AppAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+WechatAuth:
+  AccessSecret: jd30o3y3gk5hptmj
+AclRpc:
+  Endpoints:
+    - acl-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+DepartmentRpc:
+  Endpoints:
+    - department-rpc.xiaohuiyun.svc.cluster.local:2000
+AttachmentRpc:
+  Endpoints:
+    - attachment-rpc.xiaohuiyun.svc.cluster.local:2000

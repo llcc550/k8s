@@ -1,0 +1,30 @@
+---
+Name: yizhong.cron
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    QhSchool: qh_school
+    QhDepartment: qh_department
+    QhClass: qh_class
+    QhDepartmentMembers: qh_department_members
+    QhStudent: qh_student
+    QhTenantType: qh_tenant_type
+    QhGrade: qh_grade
+    QhAccount: qh_account
+    QhMembers: qh_members
+    QhParents: qh_parents
+    QhStudentParents: qh_student_parents
+    QhConfig: qh_config
+    QhClassRoom: qh_class_room
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+YiZhongConfig:
+  TenantId: 25
+  OrganizationId: 4933
+  BaseUrl: http://web-hub.yizhong.kai12.cn/bootstrap/
+  AppId: 0S728632ET923sJjv
+  Secret: Ug6y2t1O48es9R3N0c50OuY4XoO31663
+  SchoolCode: B32021556
+  Vi: "0000000000000000"

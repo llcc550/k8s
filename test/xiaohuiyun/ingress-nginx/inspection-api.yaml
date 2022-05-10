@@ -1,0 +1,8 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: inspection-api
+  namespace: xiaohuiyun
+spec:
+  type: ExternalName
+  externalName: zaun-inspection-api.zaun.svc.cluster.local

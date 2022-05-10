@@ -1,0 +1,36 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: internship-nginx-config
+  namespace: zaun
+data:
+  nginx.conf: |
+    worker_processes auto;
+    worker_rlimit_nofile 65535;
+    events {
+        worker_connections 65535;
+    }
+    http {
+        include mime.types;
+        default_type application/octet-stream;
+        client_body_buffer_size 2048M;
+        client_max_body_size    2048M;
+        server {
+            listen 80;
+            root /html/public;
+            location / {
+                if (!-e $request_filename) {
+                    rewrite ^(.*)$ /index.php/$1 last;
+                }
+            }
+            location ~ \.php(.*)$ {
+                fastcgi_pass 127.0.0.1:9000;
+                fastcgi_index index.php;
+                fastcgi_split_path_info ^((?U).+\.php)(/?.+)$;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO $fastcgi_path_info;
+                fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+                include fastcgi_params;
+            }
+        }
+    }

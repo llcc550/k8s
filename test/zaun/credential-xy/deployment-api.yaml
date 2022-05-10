@@ -1,0 +1,102 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: credential-api
+  namespace: xiaohuiyun
+data:
+  credential.api: |
+    ---
+    Name: credential.api
+    Log:
+      Mode: console
+    Host: 0.0.0.0
+    Port: 2000
+    Mysql:
+      DataSource: user:password@tcp(mysql-ip:mysql-port)/dbName?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+      Table:
+        Member: member
+        Receiver: receiver
+        Activity: activity
+        Key: template_key
+        Medal: medal
+        Template: template
+        Value: value
+    Auth:
+      AccessSecret: mRh26ilNqUV7Gekf
+      RefreshSecret: kZ36WXAGdPS80wU9
+    ReceiverAuth:
+      AccessSecret: hcPQCt0gMJm8nTLd
+      RefreshSecret: 40k1VwRfhyuHl9NI
+    CacheRedis:
+      Host: redis-ip:redis-port
+      Type: node
+      Pass: ''
+      Db: 1
+    XyUrl: "https://unite-stag-api.service.xiaoyangedu.net/base"
+    XyAccessToken: "0892f881f8cd49a1b70f294af361a455"
+    MinioConfig:
+      Endpoint: https://minio.xiaojy.cn
+      AccessKeyId: minio-user
+      AccessKeySecret: minio-user-pass
+      BucketName: credential
+    HuaweiSmsConfig:
+      BaseSendUrl: 'https://smsapi.cn-north-4.myhuaweicloud.com:443/sms/batchSendSms/v1'
+      Signature: '晓慧云'
+      AppKey: '5aZLB3C4CaG219y2XBZSZ7J5BX9o'
+      AppSecret: 'FVclrEpR0IDXCZdNm3u3XkPbHHLI'
+      Templates:
+        captcha:
+          TemplateSign: '8822012423891'
+          TemplateId: '353756f230094fc8b7ca7196406484e3'
+        msg:
+          TemplateSign: '8822012423905'
+          TemplateId: '05888bb668b04271a961754cfd055322'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: credential-api
+  name: credential-api
+  namespace: xiaohuiyun
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: credential-api
+  template:
+    metadata:
+      labels:
+        app: credential-api
+      name: credential-api
+    spec:
+      containers:
+        - name: credential-api
+          image: harbor.service.xiaoyangedu.net/unite/kx-wuxixiaoyang-credential-api:v1.0.1
+          imagePullPolicy: IfNotPresent
+          command: [ "/app/zaun-credential-api", "-f", "/app/config.yaml" ]
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.yaml
+              subPath: credential.api
+      volumes:
+        - name: config
+          configMap:
+            name: credential-api
+      imagePullSecrets:
+        - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: credential-api
+  namespace: xiaohuiyun
+  labels:
+    name: credential-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 2000
+      targetPort: 2000
+  selector:
+    app: credential-api

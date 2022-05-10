@@ -1,0 +1,38 @@
+---
+Name: attendanceselfstudy.cron
+Log:
+  Mode: console
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    StudentAttendanceSelfStudy: student_attendance_self_study
+    StudentAttendanceSelfStudyTeacher: student_attendance_self_study_teacher
+    StudentAttendanceSelfStudyTime: student_attendance_self_study_time
+    StudentPunchSelfStudy: student_punch_self_study
+    SelfStudyPunchLog: self_study_punch_log
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+DevicePositionRpc:
+  Endpoints:
+    - deviceposition-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentParentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+PdfRpc:
+  Endpoints:
+    - pdf-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatPushRpc:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+PushGatewayRpc:
+  Endpoints:
+    - socketpush-rpc.xiaohuiyun.svc.cluster.local:2000
+Queue:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: attendanceselfstudy

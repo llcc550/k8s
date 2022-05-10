@@ -1,0 +1,29 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: wzqedu-cron
+  namespace: xiaohuiyun
+spec:
+  schedule: "00 */2 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: conf
+              persistentVolumeClaim:
+                claimName: conf
+          containers:
+            - name: wzqedu-cron
+              image: swr.cn-east-3.myhuaweicloud.com/xiaohuiyun/wzqedu-cron:latest
+              volumeMounts:
+                - name: conf
+                  mountPath: /app/etc
+              args:
+                - /app/wzqedu-cron
+                - -f
+                - /app/etc/wzqedu-cron.yaml
+          imagePullSecrets:
+            - name: image-pull-secret
+          restartPolicy: OnFailure

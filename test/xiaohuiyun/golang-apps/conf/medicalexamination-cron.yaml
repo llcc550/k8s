@@ -1,0 +1,31 @@
+---
+Name: medicalexamination.cron
+Log:
+  Mode: console
+RootDirectory: /app/etc/files/
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    MedicalExaminationCheckTime: medical_examination_check_time
+    MedicalExaminationResult: medical_examination_result
+    MedicalExaminationSymptom: medical_examination_symptom
+    MedicalExaminationSpecialPhysicalConstitution: medical_examination_special_physical_constitution
+    MedicalExaminationLog: medical_examination_log
+    MedicalExaminationConfig: medical_examination_config
+    MedicalExaminationDetail: medical_examination_detail
+    MedicalExaminationDetailHistory: medical_examination_detail_history
+    MedicalExaminationDetailResult: medical_examination_detail_result
+    MedicalExaminationDetailResultHistory: medical_examination_detail_result_history
+    MedicalExaminationLogExport: medical_examination_log_export
+    MedicalExaminationLogExportDetail: medical_examination_log_export_detail
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+StudentparentRpc:
+  Endpoints:
+    - studentparent-rpc.xiaohuiyun.svc.cluster.local:2000
+PdfRpc:
+  Endpoints:
+    - pdf-rpc.xiaohuiyun.svc.cluster.local:2000

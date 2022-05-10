@@ -1,0 +1,11 @@
+---
+Name: socketpush.rmq
+ConnRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+MsgQueueEtcd:
+  Hosts:
+    - etcd.xiaohuiyun.svc.cluster.local:2379
+  Key: socket_
+Queue:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: pushgateway

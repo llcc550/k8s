@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: npm-serve
+  name: npm-serve
+  namespace: xiaohuiyun
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: npm-serve
+  template:
+    metadata:
+      labels:
+        app: npm-serve
+    spec:
+      securityContext:
+        runAsUser: 0
+      containers:
+        - name: npm-serve
+          image: swr.cn-east-3.myhuaweicloud.com/wx-xiaoyang-public/node_serve:1.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - "serve /data -l tcp://0.0.0.0:5000"
+          ports:
+            - containerPort: 5000
+              name: web
+              protocol: TCP
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /data/
+              name: npm-serve-data
+      volumes:
+        - name: npm-serve-data
+          persistentVolumeClaim:
+            claimName: npm-serve-pv
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: npm-serve-service
+  namespace: xiaohuiyun
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: npm-serve

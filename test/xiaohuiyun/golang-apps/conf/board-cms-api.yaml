@@ -1,0 +1,40 @@
+---
+Name: board-cms.api
+Log:
+  Mode: console
+Host: 0.0.0.0
+Port: 2000
+Auth:
+  RandPasswordPrefix: gkm7qr32iv8fajn9e6ysu0lzhxtw5bp4
+  AccessSecret: 8mru0wcn2dbhoqyafisp3g9vxe56zj1k
+  RefreshSecret: lc1ymhnfgqjr5x89zksd0t6vbu327ep4
+CacheRedis:
+  Host: redis.xiaohuiyun.svc.cluster.local:6379
+MinioConfig:
+  Endpoint: http://minio.dinghaotech.com
+  AccessKeyId: minio-user
+  AccessKeySecret: minio-user-pass
+  BucketName: board
+Mysql:
+  DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/ujy_release?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Table:
+    Heartbeat: heartbeat
+    Apk: apk
+    User: user
+    Device: device
+    Position: position
+    PositionCategory: position_category
+    Organization: organization
+    Module: module
+    ModulePosition: module_position
+    CustomModule: custom_module
+    Photo: photo
+    PhotoPosition: photo_position
+    Event: event
+    EventCategory: event_category
+    EventPosition: event_position
+    Media: media
+    MediaPosition: media_position
+    Resource: resource
+    ResourceCategory: resource_category
+    ResourcePosition: resource_position

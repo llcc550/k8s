@@ -1,0 +1,59 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: inspection-faceengine-rmq
+  namespace: zaun
+data:
+  faceengine.rmq: |
+    Name: inspection-face.rmq
+    Log:
+      Mode: console
+    Mysql:
+      DataSource: 64b7xdry:OqXr4siPQa8Uekul@tcp(mysql.xiaohuiyun.svc.cluster.local:3306)/inspection?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+      Table:
+        UserFaceInfo: user_face_info
+    FaceTube:
+      EndPoint: beanstalkd.database.svc.cluster.local:11300
+      Tube: inspection-face
+    FaceEngine:
+      APPId: AQdKgc32czunCQZTbkXN5hYvXZiuL6JfMr8wPWZ1j8r
+      APPKey: HrkkXGXDATiSzsJhUiQVdq91jtidcAUfk8MCDZwKW4no
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: inspection-faceengine-rmq
+  name: inspection-faceengine-rmq
+  namespace: zaun
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: inspection-faceengine-rmq
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: inspection-faceengine-rmq
+      name: inspection-faceengine-rmq
+    spec:
+      containers:
+        - name: inspection-faceengine-rmq
+          image: swr.cn-east-3.myhuaweicloud.com/wx-xiaoyang-public/faceengine-rmq:v2.1-amd64
+          imagePullPolicy: IfNotPresent
+          command: [ "./face", "-f", "inspection-faceengine-rmq.yaml" ]
+          volumeMounts:
+            - name: config
+              mountPath: /app/inspection-faceengine-rmq.yaml
+              subPath: faceengine.rmq
+      volumes:
+        - name: config
+          configMap:
+            name: inspection-faceengine-rmq
+      imagePullSecrets:
+        - name: image-pull-secret

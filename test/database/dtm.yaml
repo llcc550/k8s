@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dtm
+  labels:
+    app: dtm
+  namespace: database
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dtm
+  template:
+    metadata:
+      labels:
+        app: dtm
+    spec:
+      containers:
+        - env:
+            - name: STORE_DRIVER
+              value: "redis"
+            - name: STORE_HOST
+              value: "redis-dtm.database.svc.cluster.local"
+            - name: STORE_PASSWORD
+              value: ""
+            - name: STORE_PORT
+              value: "6379"
+            - name: MICRO_SERVICE_DRIVER
+              value: 'dtm-driver-gozero'
+            - name: MICRO_SERVICE_ENDPOINT
+              value: 'localhost:36790'
+          name: dtm
+          image: yedf/dtm:1.12
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /api/ping
+              port: 36789
+              scheme: HTTP
+          readinessProbe:
+            httpGet:
+              path: /api/ping
+              port: 36789
+              scheme: HTTP
+          ports:
+            - containerPort: 36789
+              protocol: TCP
+              name: http
+            - containerPort: 36790
+              protocol: TCP
+              name: grpc
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dtm-svc
+  namespace: database
+spec:
+  type: NodePort
+  ports:
+    - port: 36790
+      targetPort: 36790
+      name: grpc
+      nodePort: 31790
+  selector:
+    app: dtm

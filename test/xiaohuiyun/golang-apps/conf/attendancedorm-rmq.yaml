@@ -1,0 +1,16 @@
+---
+Name: attendancedorm.rmq
+Log:
+  Mode: console
+MemberRpc:
+  Endpoints:
+    - member-rpc.xiaohuiyun.svc.cluster.local:2000
+WeChatPushRpcModel:
+  Endpoints:
+    - wechat-rpc.xiaohuiyun.svc.cluster.local:2000
+ClassesRpc:
+  Endpoints:
+    - classes-rpc.xiaohuiyun.svc.cluster.local:2000
+Queue:
+  Endpoint: beanstalkd.xiaohuiyun.svc.cluster.local:11300
+  Tube: attendancedorm
